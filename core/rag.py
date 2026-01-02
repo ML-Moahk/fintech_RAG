@@ -4,12 +4,12 @@ import VectorDB
 import retrieval
 import answer_generation
 
-from pdf_ingest import extract_text_from_pdf
-from embeddings import embed_chunks
-from VectorDB import store_in_chroma
-from pdf_ingest import chunk_text
-from retrieval import retrieve_similar_chunks
-from answer_generation import generate_answer
+from core.pdf_ingest import extract_text_from_pdf
+from core.embeddings import embed_chunks
+from core.VectorDB import store_in_chroma
+from core.pdf_ingest import chunk_text
+from core.retrieval import retrieve_similar_chunks
+from core.answer_generation import generate_answer
 
 if __name__ == "__main__":
     pdf_path = r"C:\Users\Owner\Downloads\finance.pdf"

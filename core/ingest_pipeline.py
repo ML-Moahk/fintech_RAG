@@ -1,8 +1,9 @@
 import os 
-from embeddings import embed_chunks
-from pdf_ingest import chunk_text
-from VectorDB import store_in_chroma
-from pdf_ingest import extract_text_from_pdf
+from core.pdf_ingest import extract_text_from_pdf
+from core.pdf_ingest import chunk_text
+from core.embeddings import embed_chunks
+from core.VectorDB import store_in_chroma
+
 
 pdf_path = r"C:\Users\Owner\Downloads\finance.pdf"
 
