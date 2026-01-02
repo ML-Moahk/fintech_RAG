@@ -1,7 +1,7 @@
 import pdfplumber
 import os
 
-pdf_path = r"C:\Users\Owner\Downloads\finance.pdf"
+pdf_path = "finance_data\finance.pdf"
 #define a function to extract text from pdf 
 def extract_text_from_pdf(pdf_path: str) -> str: 
     text = ""
