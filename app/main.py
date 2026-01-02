@@ -58,3 +58,12 @@ def ask_questions(request: QuestionRequest):
 # Register router
 # -------------------------
 app.include_router(router)
+
+
+@app.get("/")
+def root():
+    return {
+        "message": "Fintech RAG API is running",
+        "docs": "/docs",
+        "health": "/health"
+    }
