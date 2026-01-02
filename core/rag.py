@@ -12,7 +12,7 @@ from core.retrieval import retrieve_similar_chunks
 from core.answer_generation import generate_answer
 
 if __name__ == "__main__":
-    pdf_path = r"C:\Users\Owner\Downloads\finance.pdf"
+    pdf_path = "finance_data/finance.pdf"
     
 
     #Extract text 
