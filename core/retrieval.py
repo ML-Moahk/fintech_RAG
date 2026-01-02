@@ -53,10 +53,5 @@ def retrieve_similar_chunks(
             "distance": [i]
         })
 
-    return retrieved_chunks
+    return retrieved_chunks 
 
-
-results = retrieve_similar_chunks("what are the sub categories of finance")
-print("retrieval succesful")
-#for r in results:
-    #print("Distance:", r["distance"])
