@@ -25,7 +25,7 @@ def retrieve_similar_chunks(
         path=chroma_path
     )
 
-    collection = chroma_client.get_collection(
+    collection = chroma_client.get_or_create_collection(
         name=collection_name
     )
     # 3. Query Chroma 

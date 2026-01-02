@@ -1,39 +1,60 @@
-from fastapi import FastAPI
-
-app = FastAPI(title="RAG PDF Assistant")
-@app.get("/health")
-def health_check():
-    return {"status":"ok"}
-
-from fastapi import APIRouter
+from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
+
 from core.retrieval import retrieve_similar_chunks
 from core.answer_generation import generate_answer
+from core.ingest_pipeline import ingest_if_needed
 
+# -------------------------
+# Create app ONCE
+# -------------------------
+app = FastAPI(title="RAG PDF Assistant")
+
+# -------------------------
+# Startup ingestion
+# -------------------------
+@app.on_event("startup")
+def startup_event():
+    ingest_if_needed()
+
+# -------------------------
+# Health check
+# -------------------------
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+# -------------------------
+# API Router
+# -------------------------
 router = APIRouter()
+
 class QuestionRequest(BaseModel):
-    question : str 
+    question: str
+
 @router.post("/ask")
-def ask_questions (request:QuestionRequest):
-    #1. Extract Question 
+def ask_questions(request: QuestionRequest):
     question = request.question
-    
-    #2. Retrieve Relvant Chunks 
+
+    # Retrieve chunks
     chunks = retrieve_similar_chunks(question)
-    
-    if not chunks :
+
+    if not chunks:
         return {
             "answer": "I do not have enough information to answer this question",
-            "source": []
+            "sources": []
         }
-    
-    #3. Generate Answer
+
+    # Generate answer
     answer = generate_answer(question, chunks)
 
-    #4. Return Response 
-    return{
+    return {
         "question": question,
         "answer": answer,
         "sources": [c["metadata"] for c in chunks]
     }
+
+# -------------------------
+# Register router
+# -------------------------
 app.include_router(router)
