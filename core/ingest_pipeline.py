@@ -5,7 +5,7 @@ from core.embeddings import embed_chunks
 from core.VectorDB import store_in_chroma
 
 
-pdf_path = r"C:\Users\Owner\Downloads\finance.pdf"
+pdf_path = "finance_data/finance.pdf"
 from chromadb import PersistentClient
 chroma_client = PersistentClient(path=r"C:\Users\Owner\Fintech_RAG\Data")
 
